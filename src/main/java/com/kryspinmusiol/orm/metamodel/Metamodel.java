@@ -8,10 +8,7 @@ public class Metamodel<T> {
         this.cls = cls;
     }
 
-    public static Metamodel of(Class<?> cls) {
+    public static <T> Metamodel of(Class<T> cls) {
         return new Metamodel(cls);
     }
-
-
-
 }
