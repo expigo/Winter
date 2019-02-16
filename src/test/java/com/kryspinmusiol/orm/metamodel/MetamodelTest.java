@@ -1,6 +1,6 @@
 package com.kryspinmusiol.orm.metamodel;
 
-import com.kryspinmusiol.modelexample.Person;
+import com.kryspinmusiol.testfixtures.model.Person;
 import com.kryspinmusiol.orm.mappingabstractions.PrimaryKeyColumn;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

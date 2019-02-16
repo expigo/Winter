@@ -1,8 +1,6 @@
 package com.kryspinmusiol.orm.metamodel;
 
-import com.kryspinmusiol.modelexample.Person;
-
-import java.util.List;
+import com.kryspinmusiol.testfixtures.model.Person;
 
 public interface TestHelper {
 
