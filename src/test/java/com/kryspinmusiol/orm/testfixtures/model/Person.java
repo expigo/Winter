@@ -1,5 +1,6 @@
 package com.kryspinmusiol.orm.testfixtures.model;
 
+import com.kryspinmusiol.orm.annotations.Column;
 import com.kryspinmusiol.orm.annotations.Entity;
 import com.kryspinmusiol.orm.annotations.PrimaryKey;
 
@@ -8,7 +9,11 @@ public class Person {
 
     @PrimaryKey
     private int id;
+
+    @Column
     private String name;
+
+    @Column
     private int age;
 
     public Person(int id, String name, int age) {

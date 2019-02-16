@@ -1,6 +1,5 @@
 package com.kryspinmusiol.orm.metamodel;
 
-import com.kryspinmusiol.orm.mappingabstractions.ColumnField;
 import com.kryspinmusiol.orm.testfixtures.model.Person;
 import com.kryspinmusiol.orm.mappingabstractions.PrimaryKeyColumn;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,10 +9,11 @@ import org.junit.jupiter.api.Test;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MetamodelTest {
+class MetamodelTest implements TestHelper{
 
     private Metamodel<Person> metamodel;
 
@@ -21,7 +21,7 @@ class MetamodelTest {
     @DisplayName("Given that we want Metamodel of Person class")
     void setUp() {
         // when calling factory for the Metamodel
-        metamodel = Metamodel.of(Person.class);
+        metamodel = (Metamodel<Person>) getMetamodel();
     }
 
     @Test
@@ -46,11 +46,16 @@ class MetamodelTest {
     }
 
     @Test
-    @DisplayName("Then return the list of all columns")
-    void getColumns() {
-        List<ColumnField> columns = metamodel.getColumns();
-//        assertEquals();
+    @DisplayName("Then return the list of all columns names")
+    void getColumns() throws NoSuchFieldException {
+        final List<String> columnNames = metamodel.getColumns()
+                .stream().map(cf -> cf.getField().getName()).collect(Collectors.toList());
+        assertEquals(getColumnNamesFromMockEntity() ,columnNames);
     }
 
 
+    @Override
+    public Metamodel<?> getMetamodel() {
+        return Metamodel.of(Person.class);
+    }
 }
