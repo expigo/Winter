@@ -1,5 +1,7 @@
 package com.kryspinmusiol.orm.metamodel;
 
+import com.kryspinmusiol.orm.annotations.PrimaryKey;
+import com.kryspinmusiol.orm.mappingabstractions.PrimaryKeyColumn;
 import com.sun.source.tree.ParameterizedTypeTree;
 
 import java.lang.reflect.Field;
@@ -19,4 +21,20 @@ public class Metamodel<T> {
         Objects.requireNonNull(cls);
         return new Metamodel(cls);
     }
+
+    public PrimaryKeyColumn getPrimaryKeyColumn() {
+        final Field[] declaredFields = cls.getDeclaredFields();
+        for (Field field : declaredFields) {
+
+            if (field.isAnnotationPresent(PrimaryKey.class)) {
+                PrimaryKeyColumn primaryKeyColumn = new PrimaryKeyColumn(field);
+                return primaryKeyColumn;
+            }
+        }
+
+        throw new IllegalArgumentException("Entity requires Primary Key: " + cls.getSimpleName());
+    }
+
+
+
 }

@@ -7,11 +7,11 @@ import java.lang.reflect.Field;
 public class PrimaryKeyColumn {
 
     private final Field field;
-    private final PrimaryKey primaryKey;
+    private PrimaryKey primaryKey;
 
-    public PrimaryKeyColumn(Field field, PrimaryKey primaryKey) {
+    public PrimaryKeyColumn(Field field) {
         this.field = field;
-        this.primaryKey = primaryKey;
+        this.primaryKey = this.field.getAnnotation(PrimaryKey.class);
     }
 
     public Class<?> getType() {

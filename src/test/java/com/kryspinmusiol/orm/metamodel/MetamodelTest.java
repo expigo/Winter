@@ -1,6 +1,7 @@
 package com.kryspinmusiol.orm.metamodel;
 
 import com.kryspinmusiol.modelexample.Person;
+import com.kryspinmusiol.orm.mappingabstractions.PrimaryKeyColumn;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -36,8 +37,10 @@ class MetamodelTest {
 
     @Test
     @DisplayName("Then return the correct field from entity marked as @PrimaryKey")
-    void getPrimaryKeyFromEntity() {
+    void getPrimaryKeyFromEntity() throws NoSuchFieldException {
         // when asked for the entity Primary Key
+        final PrimaryKeyColumn primaryKeyColumn = metamodel.getPrimaryKeyColumn();
+        assertEquals(Person.class.getDeclaredField("id"), primaryKeyColumn.getField());
 
     }
 
