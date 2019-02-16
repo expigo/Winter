@@ -1,4 +1,4 @@
-package com.kryspinmusiol.testfixtures.model;
+package com.kryspinmusiol.orm.testfixtures.model;
 
 import com.kryspinmusiol.orm.annotations.Entity;
 import com.kryspinmusiol.orm.annotations.PrimaryKey;
