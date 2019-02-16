@@ -1,10 +1,6 @@
 package com.kryspinmusiol.orm.metamodel;
 
-<<<<<<< HEAD
-import com.kryspinmusiol.testfixtures.model.Person;
-=======
 import com.kryspinmusiol.orm.testfixtures.model.Person;
->>>>>>> goofyme/put-model-package-in-testfixtures
 import com.kryspinmusiol.orm.mappingabstractions.PrimaryKeyColumn;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
