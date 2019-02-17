@@ -4,7 +4,6 @@ package com.kryspinmusiol.orm.metamodel;
 import com.kryspinmusiol.orm.mappingabstractions.ColumnField;
 import com.kryspinmusiol.orm.testfixtures.model.Person;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
