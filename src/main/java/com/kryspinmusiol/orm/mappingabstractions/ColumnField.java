@@ -17,12 +17,12 @@ public class ColumnField implements AbstractField {
 
     @Override
     public Class<?> getType() {
-        return null;
+        return field.getType();
     }
 
     @Override
     public Field getField() {
-        return null;
+        return field;
     }
 
     @Override

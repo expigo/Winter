@@ -1,26 +1,35 @@
 package com.kryspinmusiol.orm.annotations;
 
 import java.lang.annotation.Annotation;
-import java.util.EnumSet;
-import java.util.Optional;
+import java.util.Collections;
+import java.util.List;
+import java.util.function.Supplier;
+
 
 public enum AnnotationEnum {
-    ENTITY(Entity.class.getSimpleName()),
-    PRIMARY_KEY(PrimaryKey.class.getSimpleName()),
-    COLUMN(Column.class.getSimpleName());
+    ENTITY(Entity.class),
+    PRIMARY_KEY(PrimaryKey.class),
+    COLUMN(Column.class);
 
-    private final String annotationName;
+    private final Class<? extends Annotation> annotationName;
 
-    AnnotationEnum(String columnClassName) {
+    private static final List<AnnotationEnum> cachedAnnotations = Collections.unmodifiableList(List.of(AnnotationEnum.values()));
+
+    AnnotationEnum(Class<? extends Annotation> columnClassName) {
         this.annotationName = columnClassName;
     }
 
-    public  String getAnnotation() {
+    public Class<? extends Annotation> getAnnotation() {
         return annotationName;
     }
 
-    public static <T extends Enum<T>> Optional<T> getIfPresent(Class<T> clazz, String name) {
-        return EnumSet.allOf(clazz).stream().filter(v -> v.name().equals(name))
-                .findAny();
+
+    public static AnnotationEnum getIfPresent(Class<? extends Annotation> klass, Supplier<? extends AnnotationEnum> defaultAction) {
+
+        final AnnotationEnum annotationEnum = cachedAnnotations.stream()
+                .filter(c -> c.getAnnotation().equals(klass))
+                .findFirst().orElseGet(defaultAction);
+
+        return annotationEnum;
     }
 }

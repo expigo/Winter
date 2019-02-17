@@ -4,7 +4,6 @@ import com.kryspinmusiol.orm.annotations.AnnotationEnum;
 import com.kryspinmusiol.orm.annotations.Column;
 import com.kryspinmusiol.orm.annotations.PrimaryKey;
 import com.kryspinmusiol.orm.mappingabstractions.AbstractField;
-import com.kryspinmusiol.orm.mappingabstractions.ColumnField;
 import com.kryspinmusiol.orm.mappingabstractions.PrimaryKeyField;
 import com.kryspinmusiol.orm.mappingabstractions.factories.EntityFactory;
 
@@ -56,9 +55,10 @@ public class Metamodel<T> {
     }
 
     private Class<? extends AbstractField> getAssociatedAbstractionField(Class<? extends Annotation> klass) {
-//        final Optional<AnnotationEnum> ifPresent = AnnotationEnum.getIfPresent(AnnotationEnum.class, klass.getSimpleName());
-        final Optional<AnnotationEnum> ifPresent = AnnotationEnum.getIfPresent(AnnotationEnum.class, "PRIMARY_KEY");
-        return EntityFactory.getMappingColumnFactory(ifPresent.get());
+        final AnnotationEnum annotation = AnnotationEnum.getIfPresent(klass, () -> {
+            throw new IllegalArgumentException("No field with such annotation found:" + klass);
+        } );
+        return EntityFactory.getMappingColumnFactory(annotation);
     }
 
 }

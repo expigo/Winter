@@ -9,10 +9,6 @@ public class PrimaryKeyField implements AbstractField {
     private final Field field;
     private PrimaryKey primaryKey;
 
-    public PrimaryKeyField() {
-        this.field = null;
-    }
-
     public PrimaryKeyField(Field field) {
         this.field = field;
         this.primaryKey = this.field.getAnnotation(PrimaryKey.class);
