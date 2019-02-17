@@ -1,12 +1,9 @@
 package com.kryspinmusiol.orm.mappingabstractions.factories;
 
 import com.kryspinmusiol.orm.annotations.AnnotationEnum;
-import com.kryspinmusiol.orm.annotations.PrimaryKey;
 import com.kryspinmusiol.orm.mappingabstractions.AbstractField;
 import com.kryspinmusiol.orm.mappingabstractions.ColumnField;
 import com.kryspinmusiol.orm.mappingabstractions.PrimaryKeyField;
-
-import java.lang.annotation.Annotation;
 
 public abstract class EntityFactory {
 
