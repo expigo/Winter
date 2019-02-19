@@ -1,4 +1,4 @@
-package com.kryspinmusiol.di.annotation;
+package com.kryspinmusiol.ioc.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
