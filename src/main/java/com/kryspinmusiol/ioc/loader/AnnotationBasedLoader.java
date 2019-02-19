@@ -1,5 +1,6 @@
 package com.kryspinmusiol.ioc.loader;
 
+import com.kryspinmusiol.ioc.annotation.configuration.Conf;
 import org.reflections.Reflections;
 
 import java.util.Map;
