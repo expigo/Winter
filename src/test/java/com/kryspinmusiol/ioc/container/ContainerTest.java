@@ -13,7 +13,11 @@ class ContainerTest {
     @BeforeEach
     @DisplayName("Given the annotation container")
     void setUp() {
-        container = new Container();
     }
 
+    @Test
+    void shouldCreateContainerBasedOnGivenConfiguration() {
+        container = Container.create();
+        System.out.println(container);
+    }
 }

@@ -10,7 +10,6 @@ public interface Loader {
 
     default Map<Class<?>, Supplier<?>> getObjectGraph() {
         Set<Class<?>> services = getServices();
-
         return assembleObjectGraph(services);
     }
 
