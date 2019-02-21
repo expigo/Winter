@@ -25,12 +25,11 @@ public class EntityManagerFactory {
     }
 
     public EntityManager createEntityManager() {
-        return new DBEntityManager();
+        return (EntityManager) dependencyContainer.resolve(EntityManager.class);
     }
 
     public EntityManager getEntityManager(Class<?> cls) {
-//        return dependencyContainer.resolve(cls);
-        return null;
+        return (EntityManager) dependencyContainer.resolve(cls);
     }
 
 }
