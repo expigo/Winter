@@ -1,18 +1,17 @@
 package com.kryspinmusiol.orm.metamodel;
 
-import com.kryspinmusiol.orm.testfixtures.model.Person;
 import com.kryspinmusiol.orm.mappingabstractions.PrimaryKeyField;
+import com.kryspinmusiol.orm.testfixtures.model.Person;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MetamodelTest implements TestHelper{
 
