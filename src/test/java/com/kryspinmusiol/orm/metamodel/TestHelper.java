@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 public interface TestHelper {
 
-    Metamodel  getMetamodel();
+    Metamodel<?>  getMetamodel();
 
     default List<String> getColumnNamesFromMockEntity() throws NoSuchFieldException {
 
