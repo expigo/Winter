@@ -1,0 +1,6 @@
+[
+  {
+    "type": "com.kryspinmusiol.demo.model.Duck",
+    "mapTo": "com.kryspinmusiol.demo.model.DonaldDuck"
+  }
+]

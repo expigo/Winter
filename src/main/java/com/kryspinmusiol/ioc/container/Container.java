@@ -1,29 +1,39 @@
 package com.kryspinmusiol.ioc.container;
 
 import com.kryspinmusiol.ioc.annotation.configuration.ComponentScan;
+import com.kryspinmusiol.ioc.exception.ContainerException;
 import com.kryspinmusiol.ioc.loader.AnnotationBasedLoader;
+import com.kryspinmusiol.ioc.loader.JsonClassPathLoader;
 import com.kryspinmusiol.ioc.loader.Loader;
 import org.reflections.Reflections;
 
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 public class Container {
 
+
     private final Loader configurationLoader;
+    private Map<Class<?>, Supplier<?>> objectGraph = new HashMap<>();
 
 
     private Container(Loader loader) {
         configurationLoader = loader;
+        objectGraph = loader.loadConfiguration();
     }
-
 
 
     public static Container create(){
-        return new Container(getAppropriateLoader());
+        return new Container(getAnnotationLoader());
     }
 
-    private static Loader getAppropriateLoader() {
+    public static Container create(String configurationPath){
+        return new Container(new JsonClassPathLoader(configurationPath));
+    }
+
+    private static Loader getAnnotationLoader() {
         final String callerClassName = getCallerRootPackage();
         final String[] packages = callerClassName.split("\\.");
         final String callerRootPackage = packages[0] + "." + packages[1];
@@ -39,7 +49,7 @@ public class Container {
             final String baseDir = componentScanOpt.get().baseDir();
             return new AnnotationBasedLoader(baseDir);
         } else {
-            return null; // todo: JsonClassPathLoader
+            throw new ContainerException("There was a problem with annotation configuration");
         }
 
     }
@@ -58,6 +68,10 @@ public class Container {
         return null;
     }
 
+
+    public void getGraph() {
+        System.out.println(configurationLoader.loadConfiguration());
+    }
 
 
 }

@@ -21,8 +21,7 @@ class AnnotationBasedLoaderTest {
     @Test
     @DisplayName("Should return all services")
     void getServices() {
-        final Set<Class<?>> services = loader.getServices();
-        System.out.println("services = " + services);
+        loader.loadConfiguration();
 
     }
 }

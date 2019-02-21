@@ -8,13 +8,6 @@ import java.util.function.Supplier;
 
 public interface Loader {
 
-    default Map<Class<?>, Supplier<?>> getObjectGraph() {
-        Set<Class<?>> services = getServices();
-        return assembleObjectGraph(services);
-    }
-
-    Set<Class<?>> getServices();
-    Map<Class<?>, Supplier<?>> assembleObjectGraph(Set<Class<?>> services);
-
+    Map<Class<?>, Supplier<?>> loadConfiguration();
 
 }
