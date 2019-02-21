@@ -5,6 +5,7 @@ import com.kryspinmusiol.orm.annotations.Column;
 import com.kryspinmusiol.orm.annotations.PrimaryKey;
 import com.kryspinmusiol.orm.mappingabstractions.AbstractField;
 import com.kryspinmusiol.orm.mappingabstractions.PrimaryKeyField;
+import com.kryspinmusiol.orm.mappingabstractions.entitymetamodel.EntityModel;
 import com.kryspinmusiol.orm.mappingabstractions.factories.EntityFactory;
 
 import java.lang.annotation.Annotation;
@@ -41,6 +42,11 @@ public class Metamodel<T> {
         return pickDesiredColumns(Column.class);
     }
 
+
+    public EntityModel getEntityModel() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        return EntityModel.create(getPrimaryKeyColumn(), getColumns());
+    }
+
     private List<AbstractField> pickDesiredColumns(Class<? extends Annotation> klass) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         List<AbstractField> columnFields = new ArrayList<>();
         final Class<? extends AbstractField> abstractField = getAssociatedAbstractionField(klass);
@@ -60,5 +66,7 @@ public class Metamodel<T> {
         } );
         return EntityFactory.getMappingColumnFactory(annotation);
     }
+
+
 
 }
