@@ -1,4 +1,4 @@
-package com.kryspinmusiol.orm;
+package com.kryspinmusiol.orm.entitymanager;
 
 public interface EntityManager {
 
