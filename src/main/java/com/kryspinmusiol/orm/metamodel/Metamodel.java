@@ -12,11 +12,11 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
-public class Metamodel<T> {
+public class Metamodel {
 
-    private Class<T> cls;
+    private Class<?> cls;
 
-    private Metamodel(Class<T> cls) {
+    private Metamodel(Class<?> cls) {
         this.cls = cls;
     }
 

@@ -16,25 +16,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MetamodelTest implements TestHelper{
 
-    private Metamodel<Person> metamodel;
+    private Metamodel metamodel;
 
     @BeforeEach
     @DisplayName("Given that we want Metamodel of Person class")
     void setUp() {
         // when calling factory for the Metamodel
-        metamodel = (Metamodel<Person>) getMetamodel();
-    }
-
-    @Test
-    @DisplayName("Then the type is truly of Person type")
-    void shouldReturnModelOfProperType() throws NoSuchFieldException {
-        assertEquals(Person.class, getParameterizedType());
-    }
-
-    private Class<?> getParameterizedType() throws NoSuchFieldException {
-        final Field clsField = MetamodelTest.class.getDeclaredField("metamodel");
-        ParameterizedType clsType = (ParameterizedType) clsField.getGenericType();
-        return (Class<?>) clsType.getActualTypeArguments()[0];
+        metamodel =  getMetamodel();
     }
 
 
@@ -57,7 +45,7 @@ class MetamodelTest implements TestHelper{
 
 
     @Override
-    public Metamodel<?> getMetamodel() {
+    public Metamodel getMetamodel() {
         return Metamodel.of(Person.class);
     }
 }
