@@ -12,8 +12,13 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Metamodel<T> {
+
+    private static final int NUMBER_OF_PRIMARY_KEYS = 1;
+
 
     private Class<T> cls;
 
@@ -47,7 +52,25 @@ public class Metamodel<T> {
         return EntityModel.create(getPrimaryKeyColumn(), getColumns());
     }
 
-    
+    public String buildInsertStatement() throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+        final List<AbstractField> columns = getColumns();
+        final String preparedColumnNames = getFormattedColumnNames(columns);
+        final String questionMarks = buildQuestionMarks(columns.size() + NUMBER_OF_PRIMARY_KEYS);
+
+        return "insert into " + this.cls.getSimpleName() + "(" + preparedColumnNames + ") values (" + questionMarks + ")";
+    }
+
+    private String buildQuestionMarks(int noOfColumns) {
+        return IntStream.range(0, noOfColumns).mapToObj(i -> "?").collect(Collectors.joining(", "));
+    }
+
+    private String getFormattedColumnNames(final List<AbstractField> columns) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        final List<String> columnsNames = columns.stream().map(AbstractField::getName).collect(Collectors.toList());
+        final String primaryKeyColumnName = getPrimaryKeyColumn().getName();
+
+        columnsNames.add(0, primaryKeyColumnName);
+        return String.join(", ", columnsNames);
+    }
 
     private List<AbstractField> pickDesiredColumns(Class<? extends Annotation> klass) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         List<AbstractField> columnFields = new ArrayList<>();
@@ -65,10 +88,9 @@ public class Metamodel<T> {
     private Class<? extends AbstractField> getAssociatedAbstractionField(Class<? extends Annotation> klass) {
         final AnnotationEnum annotation = AnnotationEnum.getIfPresent(klass, () -> {
             throw new IllegalArgumentException("No field with such annotation found:" + klass);
-        } );
+        });
         return EntityFactory.getMappingColumnFactory(annotation);
     }
-
 
 
 }
