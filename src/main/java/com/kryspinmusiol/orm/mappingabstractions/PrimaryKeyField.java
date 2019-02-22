@@ -7,7 +7,8 @@ import java.lang.reflect.Field;
 public class PrimaryKeyField implements AbstractField {
 
     private final Field field;
-    private PrimaryKey primaryKey;
+    private final PrimaryKey primaryKey;
+    private String name;
 
     public PrimaryKeyField(Field field) {
         this.field = field;
@@ -25,8 +26,8 @@ public class PrimaryKeyField implements AbstractField {
     }
 
     @Override
-    public AbstractField create(Field entityField) {
-        return new PrimaryKeyField(entityField);
+    public String getName() {
+        return primaryKey.name();
     }
 }
 
