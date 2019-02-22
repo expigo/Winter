@@ -47,6 +47,8 @@ public class Metamodel<T> {
         return EntityModel.create(getPrimaryKeyColumn(), getColumns());
     }
 
+    
+
     private List<AbstractField> pickDesiredColumns(Class<? extends Annotation> klass) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         List<AbstractField> columnFields = new ArrayList<>();
         final Class<? extends AbstractField> abstractField = getAssociatedAbstractionField(klass);

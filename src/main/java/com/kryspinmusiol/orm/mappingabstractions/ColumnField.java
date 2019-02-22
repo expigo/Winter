@@ -26,8 +26,9 @@ public class ColumnField implements AbstractField {
     }
 
     @Override
-    public AbstractField create(Field entityField) {
-        return new ColumnField(entityField);
+    public String getName() {
+        return column.name() == "" ? field.getName() : column.name();
     }
+
 
 }
